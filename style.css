@@ -1,0 +1,561 @@
+/* ========================================
+   VOID HUB — Minimalist Cyberpunk Design
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: #06060c;
+    color: #c8c8e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* ── Фон ── */
+
+.bg-grid {
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(155, 48, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(155, 48, 255, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.bg-glow {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(155, 48, 255, 0.08) 0%, rgba(220, 20, 60, 0.04) 40%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+    animation: breathe 6s ease-in-out infinite;
+}
+
+@keyframes breathe {
+    0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+    50%      { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
+}
+
+/* ── Частицы ── */
+
+.particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background: rgba(155, 48, 255, 0.4);
+    animation: float linear infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh) scale(0); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+}
+
+/* ── Карточка ── */
+
+.card {
+    background: rgba(12, 12, 20, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(155, 48, 255, 0.12);
+    border-radius: 24px;
+    padding: 48px 36px 32px;
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+    z-index: 1;
+    box-shadow:
+        0 40px 80px rgba(0, 0, 0, 0.5),
+        0 0 1px rgba(155, 48, 255, 0.3);
+    animation: cardIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(155, 48, 255, 0.5), rgba(220, 20, 60, 0.5), transparent);
+}
+
+@keyframes cardIn {
+    from { opacity: 0; transform: translateY(30px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ── Логотип SVG ── */
+
+.logo-wrap {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.logo-svg .hex-main {
+    animation: hexPulse 3s ease-in-out infinite;
+}
+
+.logo-svg .hex-glow {
+    animation: hexGlow 3s ease-in-out infinite;
+}
+
+.logo-svg .hex-inner {
+    animation: hexInner 4s ease-in-out infinite;
+}
+
+@keyframes hexPulse {
+    0%, 100% { opacity: 0.9; stroke-width: 2.5; }
+    50%      { opacity: 1; stroke-width: 3; }
+}
+
+@keyframes hexGlow {
+    0%, 100% { opacity: 0.3; }
+    50%      { opacity: 0.6; }
+}
+
+@keyframes hexInner {
+    0%, 100% { opacity: 0.3; }
+    50%      { opacity: 0.6; }
+}
+
+.logo-svg .void-core {
+    animation: voidPulse 4s ease-in-out infinite;
+}
+
+@keyframes voidPulse {
+    0%, 100% { r: 28; opacity: 0.8; }
+    50%      { r: 30; opacity: 0.95; }
+}
+
+.logo-svg .void-ring {
+    animation: spinRing 12s linear infinite;
+    transform-origin: 100px 100px;
+}
+
+@keyframes spinRing {
+    to { transform: rotate(360deg); }
+}
+
+.logo-svg .void-ring-inner {
+    animation: spinRingReverse 8s linear infinite;
+    transform-origin: 100px 100px;
+}
+
+@keyframes spinRingReverse {
+    to { transform: rotate(-360deg); }
+}
+
+/* ── Заголовок ── */
+
+.brand-title {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: 6px;
+    background: linear-gradient(135deg, #DC143C 0%, #FF2079 40%, #9B30FF 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 6px;
+}
+
+.subtitle {
+    text-align: center;
+    color: rgba(155, 140, 180, 0.5);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+}
+
+.divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(155, 48, 255, 0.15), transparent);
+    margin-bottom: 28px;
+}
+
+/* ── Состояния ── */
+
+.state {
+    animation: fadeSlide 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.state.hidden {
+    display: none;
+}
+
+@keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Спиннер ── */
+
+.spinner {
+    width: 32px;
+    height: 32px;
+    border: 2px solid rgba(155, 48, 255, 0.15);
+    border-top-color: rgba(155, 48, 255, 0.8);
+    border-radius: 50%;
+    margin: 24px auto;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.state-text {
+    text-align: center;
+    color: rgba(155, 140, 180, 0.5);
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+/* ── Инфо-грид ── */
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.info-item {
+    text-align: center;
+    padding: 14px 8px;
+    background: rgba(155, 48, 255, 0.04);
+    border: 1px solid rgba(155, 48, 255, 0.08);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: border-color 0.3s;
+}
+
+.info-item:hover {
+    border-color: rgba(155, 48, 255, 0.2);
+}
+
+.info-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(155, 140, 180, 0.4);
+}
+
+.info-value {
+    font-size: 14px;
+    font-weight: 700;
+    color: #c8c8e0;
+}
+
+/* ── Статусные бейджи ── */
+
+.status-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 20px;
+}
+
+.success-badge {
+    color: #4ade80;
+    background: rgba(74, 222, 128, 0.06);
+    border: 1px solid rgba(74, 222, 128, 0.15);
+}
+
+.warning-badge {
+    color: #fbbf24;
+    background: rgba(251, 191, 36, 0.06);
+    border: 1px solid rgba(251, 191, 36, 0.15);
+}
+
+.error-badge {
+    color: #f87171;
+    background: rgba(248, 113, 113, 0.06);
+    border: 1px solid rgba(248, 113, 113, 0.15);
+}
+
+/* ── Ключ ── */
+
+.key-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(155, 48, 255, 0.04);
+    border: 1px solid rgba(155, 48, 255, 0.12);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    transition: border-color 0.3s;
+}
+
+.key-box:hover {
+    border-color: rgba(155, 48, 255, 0.25);
+}
+
+.key-box code {
+    flex: 1;
+    color: #d4a0ff;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ── Кнопка копирования ── */
+
+.copy-btn {
+    background: rgba(155, 48, 255, 0.1);
+    border: 1px solid rgba(155, 48, 255, 0.2);
+    color: rgba(200, 180, 220, 0.7);
+    padding: 7px 9px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.copy-btn:hover {
+    background: rgba(155, 48, 255, 0.2);
+    color: #d4a0ff;
+    transform: scale(1.05);
+}
+
+.copy-btn.copied {
+    background: rgba(74, 222, 128, 0.15);
+    border-color: rgba(74, 222, 128, 0.3);
+    color: #4ade80;
+}
+
+/* ── Мета-строка ── */
+
+.meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(155, 48, 255, 0.06);
+    margin-bottom: 16px;
+    font-size: 12px;
+}
+
+.meta-label {
+    color: rgba(155, 140, 180, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 10px;
+}
+
+.meta-value {
+    color: rgba(200, 180, 220, 0.7);
+    font-weight: 500;
+}
+
+/* ── Уведомление ── */
+
+.notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px 14px;
+    background: rgba(251, 191, 36, 0.04);
+    border: 1px solid rgba(251, 191, 36, 0.1);
+    border-radius: 10px;
+    font-size: 11px;
+    color: rgba(251, 191, 36, 0.6);
+    line-height: 1.5;
+}
+
+.notice svg {
+    flex-shrink: 0;
+    margin-top: 1px;
+    opacity: 0.6;
+}
+
+/* ── Подсказка ── */
+
+.hint {
+    text-align: center;
+    color: rgba(155, 140, 180, 0.35);
+    font-size: 11px;
+    margin-top: 16px;
+    line-height: 1.5;
+}
+
+/* ── Ошибка ── */
+
+.error-text {
+    text-align: center;
+    color: rgba(248, 113, 113, 0.7);
+    font-size: 12px;
+    margin-bottom: 16px;
+    line-height: 1.5;
+}
+
+/* ── Кнопки ── */
+
+.btn-primary {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #DC143C 0%, #9B30FF 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(155, 48, 255, 0.25), 0 4px 12px rgba(220, 20, 60, 0.2);
+}
+
+.btn-primary:hover::before {
+    opacity: 1;
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-primary:disabled {
+    background: rgba(60, 60, 80, 0.5);
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-secondary {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    background: rgba(155, 48, 255, 0.06);
+    color: rgba(200, 180, 220, 0.6);
+    border: 1px solid rgba(155, 48, 255, 0.12);
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+    background: rgba(155, 48, 255, 0.1);
+    border-color: rgba(155, 48, 255, 0.25);
+    color: rgba(200, 180, 220, 0.9);
+}
+
+/* ── Футер ── */
+
+.footer {
+    text-align: center;
+    color: rgba(100, 90, 130, 0.3);
+    font-size: 10px;
+    margin-top: 28px;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.footer-dot {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #DC143C, #9B30FF);
+    opacity: 0.5;
+}
+
+/* ── Адаптив ── */
+
+@media (max-width: 480px) {
+    .card {
+        padding: 36px 24px 24px;
+        border-radius: 20px;
+    }
+
+    .logo-wrap {
+        width: 72px;
+        height: 72px;
+    }
+
+    .brand-title {
+        font-size: 22px;
+        letter-spacing: 4px;
+    }
+
+    .info-grid {
+        gap: 6px;
+    }
+
+    .key-box code {
+        font-size: 11px;
+    }
+}
